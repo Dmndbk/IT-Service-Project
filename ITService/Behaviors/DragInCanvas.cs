@@ -25,9 +25,7 @@ namespace ITService.Behaviors
         private void OnButtonDown(object sender, MouseButtonEventArgs e)
         {
             if ((_Canvas ??= VisualTreeHelper.GetParent(AssociatedObject) as Canvas) is null)
-            {
-
-            }
+                return;
 
             _StartPoint = e.GetPosition(AssociatedObject);
             AssociatedObject.CaptureMouse();
@@ -46,7 +44,7 @@ namespace ITService.Behaviors
         {
 
             var obj = AssociatedObject;
-            var curr_pos = e.GetPosition(obj);
+            var curr_pos = e.GetPosition(_Canvas);
 
             var delta = curr_pos - _StartPoint;
             obj.SetValue(Canvas.LeftProperty, delta.X);
