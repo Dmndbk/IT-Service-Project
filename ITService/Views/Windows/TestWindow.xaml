@@ -10,7 +10,4 @@
         WindowStyle="None"
         Style="{StaticResource WindowStyle}"
         Title="TestWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
 </Window>
