@@ -9,5 +9,6 @@
         mc:Ignorable="d"
         WindowStyle="None"
         Style="{StaticResource WindowStyle}"
+        WindowStartupLocation="CenterScreen"
         Title="TestWindow" Height="450" Width="800">
 </Window>
