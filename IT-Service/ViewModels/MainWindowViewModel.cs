@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using System.Windows;
 
 namespace IT_Service.ViewModels
 {
@@ -22,5 +24,6 @@ namespace IT_Service.ViewModels
             //}
             set => Set(ref _Title, value);
         }
+
     }
 }
