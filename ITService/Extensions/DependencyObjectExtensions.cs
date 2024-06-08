@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Media;
 
-namespace System.Windows
+namespace ITService.UI.Extensions
 {
     static class DependencyObjectExtensions
     {

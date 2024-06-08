@@ -1,0 +1,155 @@
+﻿<UserControl x:Class="ITService.UI.Views.MainViews.EmployeeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:views="clr-namespace:ITService.UI.Views"
+             xmlns:viewModel="clr-namespace:ITService.UI.ViewModels"
+             xmlns:mainViewModels="clr-namespace:ITService.UI.ViewModels.MainViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" 
+             d:DataContext="{d:DesignInstance mainViewModels:EmployeeViewModel}">
+    <Grid>
+        <Grid.Resources>
+            <DataTemplate DataType="{x:Type viewModel:AssetsViewModel}">
+                <views:AssetsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:ChangesViewModel}">
+                <views:ChangesView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:ClientsViewModel}">
+                <views:ClientsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:EmployeesViewModel}">
+                <views:EmployeesView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:ObjectivesViewModel}">
+                <views:ObjectivesView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:ProblemsViewModel}">
+                <views:ProblemsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:RequestsViewModel}">
+                <views:RequestsView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:AssetDetailViewModel}">
+                <views:AssetDetailView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:ChangeDetailViewModel}">
+                <views:ChangeDetailView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:ClientDetailViewModel}">
+                <views:ClientDetailView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:EmployeeDetailViewModel}">
+                <views:EmployeeDetailView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:ObjectiveDetailViewModel}">
+                <views:ObjectiveDetailView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:ProblemDetailViewModel}">
+                <views:ProblemDetailView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:RequestDetailViewModel}">
+                <views:RequestDetailView/>
+            </DataTemplate>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" x:Name="NavigationGrid" Width="60" Background="#2F3136">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <ToggleButton VerticalAlignment="Center" 
+               Style="{DynamicResource ToggleButtonStyle}" 
+               HorizontalAlignment="Left" 
+               Margin="13 15 15 15">
+                    <ToggleButton.Triggers>
+                        <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="NavigationGrid" 
+                                      Storyboard.TargetProperty="Width" 
+                                      BeginTime="0:0:0" From="210" To="60" Duration="0:0:0.2">
+                                    </DoubleAnimation>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="ToggleButton.Checked">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="NavigationGrid" 
+                                      Storyboard.TargetProperty="Width" 
+                                      BeginTime="0:0:0" From="60" To="210" Duration="0:0:0.2">
+                                    </DoubleAnimation>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ToggleButton.Triggers>
+                </ToggleButton>
+
+                <Label Content="{Binding User.Login}"
+                       Foreground="White"
+                       FontWeight="Bold"
+                       FontSize="16"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Margin="60 0 0 0" />
+            </Grid>
+            <StackPanel Grid.Row="1" Margin="-1 0 0 20">
+
+                <Button Command="{Binding NavigateToRequestsCommand}" Style="{StaticResource PopupButtonStyle}">
+                    <Grid Width="250" Height="40" Margin="2 0 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Path Grid.Column="0" Width="20" Data="{StaticResource Billing}" Stretch="Uniform" Fill="{StaticResource SecondaryIconColor}"/>
+                        <TextBlock Grid.Column="1" Text="Заявки" Foreground="{StaticResource SecondaryIconColor}"
+                    VerticalAlignment="Center" FontSize="14"/>
+                    </Grid>
+                </Button>
+                <Button Command="{Binding NavigateToChangesCommand}" Style="{StaticResource PopupButtonStyle}">
+                    <Grid Width="250" Height="40" Margin="2 0 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Path Grid.Column="0" Width="20" Data="{StaticResource Billing}" Stretch="Uniform" Fill="{StaticResource SecondaryIconColor}"/>
+                        <TextBlock Grid.Column="1" Text="Изменения" Foreground="{StaticResource SecondaryIconColor}"
+                                   VerticalAlignment="Center" FontSize="14"/>
+                    </Grid>
+                </Button>
+                <Button Command="{Binding NavigateToObjectivesCommand}" Style="{StaticResource PopupButtonStyle}">
+                    <Grid Width="250" Height="40" Margin="2 0 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Path Grid.Column="0" Width="20" Data="{StaticResource Billing}" Stretch="Uniform" Fill="{StaticResource SecondaryIconColor}"/>
+                        <TextBlock Grid.Column="1" Text="Задачи" Foreground="{StaticResource SecondaryIconColor}"
+                                   VerticalAlignment="Center" FontSize="14"/>
+                    </Grid>
+                </Button>
+                <Button Command="{Binding NavigateToProblemsCommand}" Style="{StaticResource PopupButtonStyle}">
+                    <Grid Width="250" Height="40" Margin="2 0 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Path Grid.Column="0" Width="20" Data="{StaticResource Billing}" Stretch="Uniform" Fill="{StaticResource SecondaryIconColor}"/>
+                        <TextBlock Grid.Column="1" Text="Проблемы" Foreground="{StaticResource SecondaryIconColor}"
+                                   VerticalAlignment="Center" FontSize="14"/>
+                    </Grid>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <ContentControl Grid.Column="1" Content ="{Binding Navigation.CurrentView}"/>
+    </Grid>
+</UserControl>

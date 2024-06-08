@@ -1,9 +1,9 @@
-﻿using Microsoft.Xaml.Behaviors;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
+using ITService.UI.Extensions;
+using Microsoft.Xaml.Behaviors;
 
-namespace ITService.Behaviors
+namespace ITService.UI.Behaviors
 {
     class CloseWindow : Behavior<Button>
     {

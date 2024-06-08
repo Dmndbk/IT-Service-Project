@@ -1,10 +1,11 @@
-﻿using Microsoft.Xaml.Behaviors;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
+using ITService.UI.Extensions;
+using Microsoft.Xaml.Behaviors;
 
-namespace ITService.Behaviors
+namespace ITService.UI.Behaviors
 {
-    class WindowStateChange : Behavior<Button>
+    internal class WindowStateChange : Behavior<Button>
     {
         protected override void OnAttached()
         {
@@ -18,17 +19,14 @@ namespace ITService.Behaviors
 
         private void OnButtonClick(object sender, RoutedEventArgs e)
         {
-            if (!(AssociatedObject.FindVisualRoot() is Window window)) return;
+            if (AssociatedObject.FindVisualRoot() is not Window window) return;
 
-            switch (window?.WindowState)
+            window.WindowState = window.WindowState switch
             {
-                case WindowState.Normal: 
-                    window.WindowState = WindowState.Maximized;
-                    break;
-                case WindowState.Maximized:
-                    window.WindowState = WindowState.Normal;
-                    break;
-            }
+                WindowState.Normal => WindowState.Maximized,
+                WindowState.Maximized => WindowState.Normal,
+                _ => window.WindowState
+            };
         }
     }
 }

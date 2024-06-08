@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="ITService.UI.Views.ProblemDetailView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ITService.UI.Views"
+             xmlns:viewModels="clr-namespace:ITService.UI.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             FontFamily="Verdana" FontSize="15"
+             d:DataContext="{d:DesignInstance viewModels:ProblemDetailViewModel}">
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="Label">
+                <Setter Property="Foreground" Value="{DynamicResource PrimaryTextColor}"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
+                Style="{DynamicResource BorderStyle}">
+            <Label Content="Информация о проблеме" FontWeight="Bold" 
+                   Margin="10 0 0 0"
+                   VerticalAlignment="Center"/>
+        </Border>
+        
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Margin="5 0 5 0">
+            <Label Content="Тема"/>
+            <TextBox Text="{Binding Problem.Theme, UpdateSourceTrigger=PropertyChanged}" 
+                     Style="{DynamicResource TextBoxStyle}"/>
+            <Label Content="Статус"/>
+            <ComboBox ItemsSource="{Binding Statuses}"
+                      DisplayMemberPath="Name"
+                      SelectedValuePath="Id"
+                      IsEnabled="False"
+                      SelectedValue="{Binding Problem.CurrentStatusId}"
+                      Margin="5 0 5 6"/>
+            <Label Content="Уровень влияния"/>
+            <ComboBox ItemsSource="{Binding InfluenceLevels}"
+                  DisplayMemberPath="Name"
+                  SelectedValuePath="Id"
+                  SelectedValue="{Binding Problem.CurrentInfluenceLevelId}"
+                  Margin="5 0 5 6"/>
+            <Label Content="Планируемая дата решения"/>
+            <DatePicker Text="{Binding Problem.EndDate, Mode=TwoWay}"
+                    Style="{StaticResource DatePickerStyle}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1"  Grid.Column="1" Margin="5 0 5 0">
+            <Label Content="Описание"/>
+            <TextBox Height="165" 
+                     Text="{Binding Problem.Description, UpdateSourceTrigger=PropertyChanged}" 
+                     Style="{DynamicResource TextBoxStyle}"/>
+        </StackPanel>
+
+        <Border Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"
+                Style="{DynamicResource BorderStyle}">
+            <StackPanel  Orientation="Horizontal">
+                <Button Margin="10 0 0 0" 
+                        Style="{DynamicResource DefaultButtonStyle}"
+                        Content="Сохранить"
+                        Command="{Binding SaveCommand}"/>
+                <Button Margin="10 0 0 0"  
+                        Style="{DynamicResource DefaultButtonStyle}"
+                        Content="Назад"
+                        Command="{Binding NavigateToBackCommand}"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
